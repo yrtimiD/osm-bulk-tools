@@ -11,7 +11,8 @@ The process was as follows:
 * Filter needed data into filtered_dump.osm (for example all streets within city)
 * osmconvert filtered_dump.osm --csv-headline --csv="@id @lon @lat is_in highway name name:he name:he1 name:he2 name:he3 name:ar name:ru name:en name:en1 name:en2 name:en3 name:en4 name:en5 name:en6" -o=data.csv
 * Upload data.csv to the google spreadsheet, edit and export back into CSV file.
-* Use OsmBulkTools to upload changed data to the OSM.
+* Use OsmBulkTools to create .xml.osm file of updated data
+* Use JOSM (http://josm.openstreetmap.de/) to upload changed data to the OSM.
 
 Current version supports updating tags in existing OSM data from external csv file.
 
