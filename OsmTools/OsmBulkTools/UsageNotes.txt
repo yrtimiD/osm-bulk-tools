@@ -1,1 +1,8 @@
-﻿
+Current version supports updating tags in existing OSM data from external csv file.
+
+In other words: for each element in CSV (recognized by id and type) downloaded original data from the server, and then tag values from csv copied into.
+
+All element tags which were not in CSV - untouched. If CSV have empty value for some tag - this tag is removed. If CSV have updated value - it will replace old value. If CSV have not existing tag - it will be added.
+All columns which starts from "@" are ignored.
+Special parameters used to pass names of the "id" and "type" columns. (type recognized as in osmconvert 0-node, 1-way, 2-relation)
+Another special column "update" may be used, to process only marked rows in CSV. Column may have any non empty value.
