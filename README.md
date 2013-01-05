@@ -35,3 +35,7 @@ osm-bulk-tools is available under the [WTFPL](http://sam.zoy.org/wtfpl/).
 * https://github.com/yrtimiD/osm-api-dotnet is licensed under the [WTFPL](http://sam.zoy.org/wtfpl/).
 
 * A Fast CSV Reader By Sebastien Lorion, 10 Nov 2011 (http://www.codeproject.com/Articles/9258/A-Fast-CSV-Reader) Licensed under The MIT License
+
+## Compiled binaries
+
+https://www.dropbox.com/sh/evhxpi2xqgihm7i/ZcPDP9LBg3
