@@ -164,12 +164,13 @@ namespace OsmBulkTools
 			Proxy p = new Proxy();
 			int page = 0;
 			int pageSize = 100;
-			while (page * pageSize < data.Count())
+			int count = data.Count();
+			while (page * pageSize < count)
 			{
 				//Trace.WriteLine("Page " + page.ToString() + " size " + pageSize.ToString());
 				var currentPage = dataById.Keys.Skip(page * pageSize).Take(pageSize);
 
-				Trace.WriteLine(String.Format("Geting next {0} {1}s from the API", pageSize, type));
+				Trace.WriteLine(String.Format("Getting next {0} {1}s from the API", pageSize, type));
 				IEnumerable<Element> elements = null;
 				#region get elements by type
 				try
@@ -215,6 +216,8 @@ namespace OsmBulkTools
 				}
 
 				page++;
+				int done = ((page * pageSize)<count)?(page * pageSize):count;
+				Trace.WriteLine(String.Format("{0} out of {1} {2}s have been processed", done, count, type));
 			}
 		}
 
