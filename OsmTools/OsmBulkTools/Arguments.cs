@@ -15,6 +15,7 @@ namespace OsmBulkTools
 		const string ARG_ID = PREFIX + "id=";
 		const string ARG_TYPE = PREFIX + "type=";
 		const string ARG_UPDATE = PREFIX + "update=";
+		const string ARG_MERGE_DUPLICATE = PREFIX + "merge-duplicate";
 		static readonly string MISSED_ARG_ERROR = "Must supply {0} parameter" + Environment.NewLine;
 
 		public bool ShowHelp { get; private set; }
@@ -26,7 +27,8 @@ namespace OsmBulkTools
 		public string IdField { get; private set; }
 		public string TypeField { get; private set; }
 		public string UpdateField { get; private set; }
-		
+		public bool MergeDuplicate { get; private set; }
+
 		protected Arguments ()	{	}
 
 		public static Arguments Parse(string[] args){
@@ -59,6 +61,9 @@ namespace OsmBulkTools
 					case ARG_UPDATE:
 						result.UpdateField = GetValue(ARG_UPDATE, arg);
 						break;
+					case ARG_MERGE_DUPLICATE:
+						result.MergeDuplicate = true;
+						break;
 					default:
 						result.Error += "Unknown parameter " + arg + Environment.NewLine;
 						break;
@@ -82,11 +87,17 @@ namespace OsmBulkTools
 				if (String.IsNullOrEmpty(TypeField))
 					Error += String.Format(MISSED_ARG_ERROR, ARG_TYPE);
 			}
+			else if (MergeDuplicate)
+			{
+				if (String.IsNullOrEmpty(Input))
+					Error += String.Format(MISSED_ARG_ERROR, ARG_IN);
+				if (String.IsNullOrEmpty(Output))
+					Error += String.Format(MISSED_ARG_ERROR, ARG_OUT);
+			}
 			else
 			{
 				ShowHelp = true;
 			}
-
 		}
 
 		private static string GetValue(string argumentName, string argumentWithValue)
@@ -97,6 +108,7 @@ namespace OsmBulkTools
 		public static void PrintUsage()
 		{
 			Trace.WriteLine(ARG_CSV_TO_OSM + "\tCSV to OSM convert");
+			Trace.WriteLine(ARG_MERGE_DUPLICATE + "\tMerge duplicate nodes");
 			Trace.WriteLine(ARG_IN + "<csv file>\tinput CSV file name");
 			Trace.WriteLine(ARG_OUT + "<osm file>\toutput OSM file name");
 			Trace.WriteLine(ARG_ID + "<column name>\tname of the column contains entity ID value");

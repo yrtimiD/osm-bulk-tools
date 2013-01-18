@@ -11,8 +11,6 @@
     <RootNamespace>OsmBulkTools</RootNamespace>
     <AssemblyName>OsmBulkTools</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -49,10 +47,14 @@
     <Compile Include="OsmFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MergeDuplicate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="RunExample.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RunExample2.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,8 +1,19 @@
-Current version supports updating tags in existing OSM data from external csv file.
+Current version supports two modes: 
 
-In other words: for each element in CSV (recognized by id and type) downloaded original data from the server, and then tag values from csv copied into.
+1 updating tags in existing OSM data from external csv file.
 
-All element tags which were not in CSV - untouched. If CSV have empty value for some tag - this tag is removed. If CSV have updated value - it will replace old value. If CSV have not existing tag - it will be added.
-All columns which starts from "@" are ignored.
-Special parameters used to pass names of the "id" and "type" columns. (type recognized as in osmconvert 0-node, 1-way, 2-relation)
-Another special column "update" may be used, to process only marked rows in CSV. Column may have any non empty value.
+	In other words: for each element in CSV (recognized by id and type) downloaded original data from the server, and then tag values from csv copied into.
+
+	All element tags which were not in CSV - untouched. If CSV have empty value for some tag - this tag is removed. If CSV have updated value - it will replace old value. If CSV have not existing tag - it will be added.
+	All columns which starts from "@" are ignored.
+	Special parameters used to pass names of the "id" and "type" columns. (type recognized as in osmconvert 0-node, 1-way, 2-relation)
+	Another special column "update" may be used, to process only marked rows in CSV. Column may have any non empty value.
+
+2 merging nodes with same coordinates
+	--in and --out parameters must be specified. Only plain OSM files supported.
+	All nodes except one with same coordinates will be marked to remove, and all tags merged into one node. Same values ignored, different values merged into same key with ";"
+	currently exists bug with merging tags, where merging A, B and A values will not ignore second A and as result A;B;A will be produced, so please review data before you upload it.
+	Resulting file will contain same items as input file, but with altered tags (if needed)  and nodes marked to delete and to update. You can upload it using JOSM.
+
+*IMPORTANT NOTE*
+Review resulting file and logs before you upload.

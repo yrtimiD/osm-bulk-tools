@@ -33,6 +33,12 @@ namespace OsmBulkTools
 					result = updater.Update();
 					Trace.WriteLine("Done.");
 				}
+				else if (arguments.MergeDuplicate)
+				{
+					MergeDuplicate merge = new MergeDuplicate(arguments);
+					merge.Merge();
+					Trace.WriteLine("Done.");
+				}
 
 
 				if (arguments.ShowHelp)
