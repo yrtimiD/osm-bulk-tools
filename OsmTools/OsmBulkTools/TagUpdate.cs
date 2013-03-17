@@ -43,15 +43,14 @@ namespace OsmBulkTools
 
 				for (int i = 0; i < reader.FieldCount; i++)
 				{
-					if (headers[i] != null)//all wrong and ignored columns marked by null in ValidateHeaders(..)
-						row.Add(headers[i], reader[i]);
+					if (headers [i] != null)//all wrong and ignored columns marked by null in ValidateHeaders(..)
+						row.Add(headers [i], reader [i]);
 				}
 
-				if (hasUpdateColumn && String.IsNullOrEmpty(row[UPDATE]))
+				if (hasUpdateColumn && String.IsNullOrEmpty(row [UPDATE]))
 				{
 					//skipping current row as it is not marked "for update"
-				}
-				else
+				} else
 				{
 					data.Add(row);
 				}
@@ -74,11 +73,15 @@ namespace OsmBulkTools
 
 			Trace.WriteLine("Processing nodes");
 			Trace.Indent();
-			var nodesOnly = data.Where(d => d[TYPE] == "0");
+			var nodesOnly = data.Where(d => d [TYPE] == "0");
 			noDuplicateIDsFound = CheckForDuplicateID(nodesOnly);
 			if (noDuplicateIDsFound)
 			{
 				UpdateElements(update, nodesOnly, ElementType.Node);
+			} 
+			else
+			{
+				Trace.WriteLine("Warning: Duplicate node IDs found. Nodes will not be processed.");
 			}
 			Trace.Unindent();
 
@@ -90,6 +93,10 @@ namespace OsmBulkTools
 			{
 				UpdateElements(update, waysOnly, ElementType.Way);
 			}
+			else
+			{
+				Trace.WriteLine("Warning: Duplicate way IDs found. Ways will not be processed.");
+			}
 			Trace.Unindent();
 
 			Trace.WriteLine("Processing relations");
@@ -99,6 +106,10 @@ namespace OsmBulkTools
 			if (noDuplicateIDsFound)
 			{
 				UpdateElements(update, relOnly, ElementType.Relation);
+			}
+			else
+			{
+				Trace.WriteLine("Warning: Duplicate relation IDs found. Relations will not be processed.");
 			}
 			Trace.Unindent();
 
