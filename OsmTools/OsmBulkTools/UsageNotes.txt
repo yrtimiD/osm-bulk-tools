@@ -13,7 +13,8 @@ Current version supports two modes:
 	--in and --out parameters must be specified. Only plain OSM files supported.
 	All nodes except one with same coordinates will be marked to remove, and all tags merged into one node. Same values ignored, different values merged into same key with ";"
 	currently exists bug with merging tags, where merging A, B and A values will not ignore second A and as result A;B;A will be produced, so please review data before you upload it.
-	Resulting file will contain same items as input file, but with altered tags (if needed)  and nodes marked to delete and to update. You can upload it using JOSM.
+	Resulting file will contain same items as input file, but with altered tags (if needed) and nodes marked to delete and to update. You can upload it using JOSM.
+	*IMPORTANT NOTE*: tool will not alter any parent object like ways or relations which points to deleted nodes, thereby this mode is useful *only* for completely unconnected nodes.
 
 *IMPORTANT NOTE*
 Review resulting file and logs before you upload.
