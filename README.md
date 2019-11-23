@@ -39,4 +39,4 @@ osm-bulk-tools is available under the [WTFPL](http://sam.zoy.org/wtfpl/).
 
 ## Compiled binaries
 
-https://www.dropbox.com/sh/evhxpi2xqgihm7i/ZcPDP9LBg3
+See [Releases](https://github.com/yrtimiD/osm-bulk-tools/releases)
